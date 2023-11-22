@@ -1,25 +1,8 @@
-export default function Page({data}){
-    return <div>
-        {data.loops.join(', ')}
-    </div>
-}
+import { useRouter } from 'next/router'
+import data from 'data/123.json'
+import loopURL from 'utils/loop-url'
 
-export async function getStaticPaths(){
-    return {
-        paths: [
-            {params: {id: "123"}}
-        ],
-        fallback: false
-    }
-}
-
-export async function getStaticProps(){
-    const fs = require('fs')
-    const data = fs.readFileSync('data/123.json').toString()
-
-    return {
-        props: {
-            data: JSON.parse(data)
-        }
-    }
+export default function Page() {
+  const router = useRouter()
+  return <p>Post: {loopURL(data.date, data.id)}</p>
 }
