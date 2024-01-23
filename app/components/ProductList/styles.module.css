@@ -1,0 +1,55 @@
+.productlist {
+  padding: 2em 0;
+}
+.productcard .title {
+  font-size: 1em;
+  letter-spacing: 1px;
+  font-weight: 600;
+  padding-top: 0.5em;
+  text-align: center;
+  color: var(--gray400);
+}
+.price {
+  font-size: 1em;
+  text-align: center;
+  color: var(--green-light);
+}
+.productcard {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--gray800);
+}
+.productcard .image {
+  min-height: 300px;
+}
+.productcard .free {
+  width: 100%;
+  letter-spacing: 2px;
+  font-size: 0.8em;
+  position: absolute;
+  top: 0;
+  left: -60px;
+  white-space: nowrap;
+  color: var(--green-light);
+  padding: 0.5em;
+  background-color: var(--gray800);
+  transform: rotate(-45deg);
+}
+.cardbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 10px;
+  padding: 0.6em 0;
+  color: var(--soller400);
+  border: 1px solid var(--soller400);
+  border-radius: 4px;
+  background: none;
+  text-transform: uppercase;
+}
+.cardbutton svg {
+  margin-right: 0.6em;
+}

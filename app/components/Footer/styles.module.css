@@ -1,0 +1,16 @@
+.footer {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  color: var(--soller100);
+  background-color: var(--soller900);
+  padding: 1em 0;
+  text-transform: lowercase;
+}
+.left,
+.right {
+  display: flex;
+  align-items: center;
+}
+.right {
+  justify-content: end !important;
+}

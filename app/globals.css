@@ -1,0 +1,48 @@
+:root {
+  --soller100: #558bff;
+  --soller200: #3e78fe;
+  --soller300: #2564fc;
+  --soller400: #084cf9;
+  --soller500: #0641d9;
+  --soller600: #0436b9;
+  --soller700: #032c9a;
+  --soller800: #02227d;
+  --soller900: #011861;
+  --gray100: #e1e1e6;
+  --gray200: #a9a9b2;
+  --gray300: #93939e;
+  --gray400: #7c7c8a;
+  --gray500: #505059;
+  --gray600: #323238;
+  --gray700: #29292e;
+  --gray800: #202024;
+  --gray900: #121214;
+  --green-light: #37d300;
+}
+/* reset */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/* styles */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  min-height: 100%;
+}
+h3 {
+  font-size: 2em;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+body {
+  background-image: url(../public/img/bg_logo.svg);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-color: var(--gray900);
+  color: var(--gray100);
+}

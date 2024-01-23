@@ -1,0 +1,14 @@
+.logo {
+  display: inline;
+  padding: 0.2em 0.4em;
+  background-color: var(--soller400);
+}
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4;
+}
+.social * {
+  margin-left: 1em;
+}

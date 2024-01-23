@@ -1,0 +1,46 @@
+.banner {
+  display: flex;
+  flex-direction: row;
+}
+.banner h2.title {
+  position: relative;
+  color: var(--gray100);
+  font-size: 2.5em;
+  min-height: 120px;
+}
+.float {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(0%);
+  width: 140%;
+}
+.float span {
+  color: var(--soller400);
+}
+.subtitle {
+  font-size: 16px;
+  color: var(--green-light);
+  position: absolute;
+  left: 0;
+  top: -25px;
+  z-index: 2;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+@media (min-width: 360px) and (max-width: 992px) {
+  .float {
+    font-size: 0.8em;
+    /* position: relative; */
+    width: 100%;
+  }
+}
