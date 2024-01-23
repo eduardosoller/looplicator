@@ -57,10 +57,7 @@ export default function ProductList({ limit }: { limit?: number }) {
             <p className={`${secondary.className} ${styles.price}`}>
               $ {price}
             </p>
-            <CardButton
-              label="Listen to tracks"
-              link={`/product-details/${id}`}
-            />
+            <CardButton label="Listen to tracks" link={`/pack/${id}`} />
           </div>
         </div>
       </div>

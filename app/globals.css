@@ -43,6 +43,6 @@ body {
   background-image: url(../public/img/bg_logo.svg);
   background-repeat: no-repeat;
   background-position: bottom right;
-  background-color: var(--gray900);
   color: var(--gray100);
+  background-color: var(--gray900) !important;
 }
