@@ -1,5 +1,5 @@
 .download-button {
-  margin: 1em 0;
+  margin: 0 0 1em 0;
   width: 220px;
   height: 60px;
   line-height: 60px;
@@ -9,15 +9,16 @@
   border: 0;
   color: var(--gray900);
   letter-spacing: 3px;
-  box-shadow: 6px 0px 0px var(--soller100);
+  box-shadow: 6px 0px 0px var(--soller600);
   outline: transparent;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-.download-button img {
-  margin-left: 0.5em;
+.download-button svg {
+  margin-top: -4px;
+  margin-left: 1em;
 }
 .download-button:after {
   --slice-0: inset(50% 50% 50% 50%);

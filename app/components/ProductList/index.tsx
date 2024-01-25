@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { secondary } from "../Fonts";
-import { getProducts } from "services/products";
+import { getProducts, type Product } from "services/products";
 import ListenSvg from "../Svg/Listen";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
@@ -10,11 +10,11 @@ type ButtonProps = {
   label: string;
   link: string;
 };
-type ProductProps = {
+type ProductCardProps = {
   id: string;
   title: string;
   cover_url: string;
-  price: string;
+  price: number;
 };
 
 export default function ProductList({ limit }: { limit?: number }) {
@@ -35,11 +35,11 @@ export default function ProductList({ limit }: { limit?: number }) {
       </Link>
     );
   }
-  function ProductCard({ id, title, cover_url, price }: ProductProps) {
+  function ProductCard({ id, title, cover_url, price }: ProductCardProps) {
     return (
       <div className="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12">
         <div className={`${styles.productcard} card`}>
-          {price == "0" && (
+          {price == 0.0 && (
             <div className={`${styles.free} col`}>FREE · FREE · FREE</div>
           )}
           <div className="card-image-top">
@@ -64,15 +64,15 @@ export default function ProductList({ limit }: { limit?: number }) {
     );
   }
   return (
-    <section className="">
+    <section>
       <div className="container">
         <div className={`${styles.productlist} row g-4 card-group`}>
-          {products.map((item: ProductProps, index: number) => (
+          {products.map((item: Product, index: number) => (
             <ProductCard
               id={item.id}
               key={index}
               title={item.title}
-              cover_url={item.cover_url}
+              cover_url={item.thumbs[280]}
               price={item.price}
             />
           ))}

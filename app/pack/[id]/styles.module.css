@@ -1,0 +1,23 @@
+.details {
+  background-color: var(--gray800);
+}
+.title {
+  color: var(--soller400);
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+.subtitle {
+  color: var(--green-light);
+  font-size: 0.8em;
+}
+.cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .cover {
+    align-items: start;
+  }
+}

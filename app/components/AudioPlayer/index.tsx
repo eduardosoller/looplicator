@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
+import WaveSurfer, { type WaveSurferOptions } from "wavesurfer.js";
 import PlaySvg from "../Svg/Play";
 import PauseSvg from "../Svg/Pause";
 import PlayerLoaderSvg from "../Svg/PlayerLoader";
@@ -17,7 +17,8 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
   const [playing, setPlaying] = useState<boolean>(false);
   const [tracks] = useState<Playlist[]>(playlist);
   const [currentTrack, setCurrentTrack] = useState<number>(0);
-  const [loadingTrack, setLoadingTrack] = useState<boolean>(false);
+  const [loadingTrack, setLoadingTrack] = useState<boolean>(true);
+  const [error, setError] = useState("");
 
   const waveSurferOptions = (ref: any): WaveSurferOptions => {
     return {
@@ -33,59 +34,73 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
   };
 
   useEffect(() => {
-    // console.log("useEffect", tracks.length);
-    // if (tracks.length <= 0) return;
     const options = waveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
     handleToggleTrack(tracks[0].url, false, 0);
     return () => {
       wavesurfer.current && wavesurfer.current.destroy();
     };
-  }, [tracks]);
+  }, []);
+
+  wavesurfer.current?.once("load", () => {
+    setLoadingTrack(true);
+  });
+  wavesurfer.current?.once("ready", () => {
+    setLoadingTrack(false);
+  });
+  wavesurfer.current?.on("finish", () => {
+    wavesurfer.current?.play();
+  });
 
   const handlePlayPause = () => {
     setPlaying(!playing);
-    wavesurfer.current?.playPause();
+    wavesurfer.current && wavesurfer.current?.playPause();
   };
-  wavesurfer.current?.on("load", () => {
-    setLoadingTrack(true);
-  });
-  wavesurfer.current?.on("ready", () => {
-    setLoadingTrack(false);
-  });
-
   const handleToggleTrack = (
     track_url: string,
     autoplay: boolean,
     index: number
   ) => {
-    wavesurfer.current?.empty();
-    setCurrentTrack(index);
-    wavesurfer.current?.load(track_url).then((_) => {
-      if (autoplay) {
-        wavesurfer.current?.play();
-        setPlaying(true);
-      }
-    });
+    if (wavesurfer.current) {
+      wavesurfer.current.seekTo(0);
+      setCurrentTrack(index);
+      setError("");
+      wavesurfer.current
+        .load(track_url)
+        .then(() => {
+          if (autoplay) {
+            wavesurfer.current?.play();
+            setPlaying(true);
+          }
+        })
+        .catch((error) => {
+          wavesurfer.current?.empty();
+          error.message === "Failed to fetch"
+            ? setError("Erro ao carregar loop")
+            : setError("Ocorreu um erro");
+        });
+    }
   };
   return (
     <div className="player">
-      <div className="waveform" ref={waveformRef} />
-      <div className={`${secondary.className} track-title`}>
-        {tracks[currentTrack].title}
-      </div>
-      <div className="controls">
-        {loadingTrack ? (
-          <PlayerLoaderSvg width={40} height={40} color="#084cf9" />
-        ) : (
-          <div onClick={handlePlayPause}>
-            {playing ? (
-              <PauseSvg width={40} height={40} color="#084cf9" />
-            ) : (
-              <PlaySvg width={40} height={40} color="#084cf9" />
-            )}
-          </div>
-        )}
+      <div className="waveform" ref={waveformRef}>
+        <div className={`${secondary.className} track-title`}>
+          {tracks[currentTrack].title}
+        </div>
+        <div className={`${secondary.className} status`}>{error}</div>
+        <div className="controls">
+          {loadingTrack ? (
+            <PlayerLoaderSvg width={40} height={40} color="#084cf9" />
+          ) : (
+            <div onClick={handlePlayPause}>
+              {playing ? (
+                <PauseSvg width={40} height={40} color="#084cf9" />
+              ) : (
+                <PlaySvg width={40} height={40} color="#084cf9" />
+              )}
+            </div>
+          )}
+        </div>
       </div>
       <div className={`${secondary.className} playlist`}>
         {playlist.map((item: any, index: number) => (

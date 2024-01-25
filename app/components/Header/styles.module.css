@@ -1,14 +1,24 @@
 .logo {
-  display: inline;
-  padding: 0.2em 0.4em;
-  background-color: var(--soller400);
+  display: flex;
+  justify-content: center;
+  padding: 1em 0 0.5em 0;
 }
 .social {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 4;
+  justify-content: center;
+  height: 100%;
 }
-.social * {
-  margin-left: 1em;
+.social a {
+  margin: 0 1em 0 1em;
+}
+@media (min-width: 768px) {
+  .logo {
+    padding: 2em 0;
+    justify-content: left;
+  }
+  .social {
+    height: 100%;
+    justify-content: flex-end;
+  }
 }

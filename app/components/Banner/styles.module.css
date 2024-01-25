@@ -40,7 +40,11 @@
 @media (min-width: 360px) and (max-width: 992px) {
   .float {
     font-size: 0.8em;
-    /* position: relative; */
     width: 100%;
+  }
+  .subtitle,
+  .float {
+    top: 0;
+    position: relative;
   }
 }

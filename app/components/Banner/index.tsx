@@ -8,13 +8,13 @@ export default function Banner() {
         <div className="row">
           <div className={`col-md-12 col-lg-6 ${styles.text}`}>
             <h2 className={styles.title}>
+              <span className={`${secondary.className} ${styles.subtitle}`}>
+                for the underground artists
+              </span>
               <div className={styles.float}>
                 Break free from the ordinary and <span>explore</span> our
                 collection of original industrial and dark ambient loops.
               </div>
-              <span className={`${secondary.className} ${styles.subtitle}`}>
-                for the underground artists
-              </span>
             </h2>
           </div>
           <div className="col-md-12 col-lg-6">
@@ -24,6 +24,7 @@ export default function Banner() {
               height="509"
               alt="home-banner"
               className={styles.image}
+              priority
             />
           </div>
         </div>

@@ -9,7 +9,10 @@ export type Product = {
   id: string;
   title: string;
   cover_url: string;
-  price: string;
+  thumbs: { 280: string, 400: string }
+  price: number;
+  payment_url: string | null
+  download_url: string | null;
   tracks: Playlist[]
 };
 const getProducts = async () => {

@@ -2,8 +2,8 @@ import Image from "next/image";
 import YoutubeSvg from "@/components/Svg/Youtube";
 import SoundcloudSvg from "@/components/Svg/Soundcloud";
 import InstagramSvg from "@/components/Svg/Instagram";
+import LogoSvg from "../Svg/Logo";
 import styles from "./styles.module.css";
-import Link from "next/link";
 export default function Header() {
   return (
     <header>
@@ -12,17 +12,11 @@ export default function Header() {
           <div className="col">
             <h1 className={styles.logo}>
               <a href="/" title="LOOPLICATOR">
-                <Image
-                  src="/img/logo.svg"
-                  width="300"
-                  height="200"
-                  alt="Looplicator Brand"
-                  priority
-                />
+                <LogoSvg color="#084cf9" width={262} height={48} />
               </a>
             </h1>
           </div>
-          <div className="col d-flex align-items-center justify-content-end">
+          <div className="col">
             <div className={styles.social}>
               <a
                 href="https://soundcloud.com/looplicator"

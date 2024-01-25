@@ -5,23 +5,9 @@ import Image from "next/image";
 import LinkButton from "@/components/LinkButton";
 import { secondary } from "@/components/Fonts";
 import AudioPlayer from "@/components/AudioPlayer";
-import "./styles.css";
+import styles from "./styles.module.css";
 import ProductList from "@/components/ProductList";
-const tracks = [
-  { title: "L001 129BPM", url: "/tracks/NjcyNDAyOTc2.mp3" },
-  { title: "L002 188BPM", url: "/tracks/MTcyMzcyNjY2Nw.mp3" },
-];
-type Playlist = {
-  title: string;
-  url: string;
-};
-const emptyProduct = {
-  id: "",
-  title: "",
-  cover_url: "http://www.placeholder.com.br",
-  price: "",
-  tracks: [{ title: "", url: "" }],
-};
+
 export default function Details({ params }: { params: { id: string } }) {
   const [data, setData] = useState<Product | null>(null);
   const [totalTracks, setTotalTracks] = useState<number | null>();
@@ -36,36 +22,48 @@ export default function Details({ params }: { params: { id: string } }) {
     fetch();
   }, [params.id]);
   if (!data) return;
+  const buttonLink = data.download_url ? data.download_url : data.payment_url;
+  const buttonLabel = data.download_url ? "DOWNLOAD" : "PAY $" + data.price;
+  const buttonIcon = data.download_url ? "download" : "pay";
   return (
-    <section className="details">
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <Image
-              src={data.cover_url}
-              alt={"cover"}
-              width={400}
-              height={400}
-              unoptimized
-              priority
-            />
-          </div>
-          <div className="col">
-            <h3>{data.title}</h3>
-            <p className={secondary.className}>
-              {totalTracks && `${totalTracks} tracks`}
-            </p>
-            {/* <p className="price">$ {data.price}</p> */}
-            <LinkButton />
-            {data && <AudioPlayer playlist={data.tracks} />}
+    <>
+      <section className={styles.details}>
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-lg-6 py-5">
+              <div className={styles.cover}>
+                <Image
+                  src={data.thumbs[400]}
+                  alt={"cover"}
+                  width={400}
+                  height={400}
+                  style={{ width: "100%", height: "auto" }}
+                  priority
+                />
+              </div>
+            </div>
+            <div className="col-12 col-lg-6 py-5">
+              <h3 className={styles.title}>{data.title}</h3>
+              <p className={`${secondary.className} ${styles.subtitle}`}>
+                {`${totalTracks} tracks | ${
+                  data.price === 0 ? "FREE" : "$" + data.price
+                }`}
+              </p>
+
+              {buttonLink && (
+                <LinkButton
+                  label={buttonLabel}
+                  url={buttonLink}
+                  icon={buttonIcon}
+                />
+              )}
+
+              {data && <AudioPlayer playlist={data.tracks} />}
+            </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col">
-            <ProductList limit={4} />
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+      <ProductList limit={4} />
+    </>
   );
 }
