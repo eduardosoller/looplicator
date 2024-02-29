@@ -9,8 +9,8 @@ export default function ProductList({
   limit = 12,
   pagination = true,
 }: {
-  limit: number;
-  pagination: boolean;
+  limit?: number;
+  pagination?: boolean;
 }) {
   const { page, changePage, nextPage, previousPage } = usePagination(limit);
 

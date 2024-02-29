@@ -1,19 +1,17 @@
 export async function GET(request: Request,
-  { params }: { params: { options: number[] } }) {
+  { params }: { params: { options: number[] } }): Promise<Response> {
   try {
     console.time('fetch json')
     const response = await fetch('https://looplipacker.s3.amazonaws.com/looplishop.json')
     if (!response.ok) {
-      console.log('response error', Response.error())
       return Response.error()
     }
     const data = await response.json()
     console.timeEnd()
     return Response.json(onDataResponse(data))
-    //console.log(data)
   } catch (error) {
     console.error('catch error', error)
-    return Response.error().statusText
+    return Response.error()
   }
 
   function onDataResponse(file: any) {
