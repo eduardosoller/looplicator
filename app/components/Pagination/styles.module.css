@@ -1,0 +1,56 @@
+.pagination_wrapper {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(0% + 25px) 100%,
+    0 calc(100% - 25px)
+  );
+  background-color: var(--soller400);
+  padding: 0.1em;
+}
+.pagination {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(0% + 25px) 100%,
+    0 calc(100% - 25px)
+  );
+  background-color: var(--gray800);
+  padding: 0.5em;
+}
+.button_pagination__next:disabled,
+.button_pagination__prev:disabled {
+  opacity: 0.5;
+}
+.button_pagination__next {
+  border: 0;
+  width: auto;
+  padding: 0.5em;
+  background-color: transparent;
+}
+.button_pagination__prev {
+  border: 0;
+  width: auto;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  background-color: transparent;
+  padding: 0.5em;
+}
+.inputDisable {
+  display: inline;
+  max-width: 80px;
+  border: 0;
+  text-align: left;
+  color: var(--soller400);
+  background-color: transparent;
+}
+.input {
+  outline: 0;
+  width: 100px;
+  border: 0;
+  text-align: center;
+  color: var(--soller400);
+  background-color: transparent;
+}

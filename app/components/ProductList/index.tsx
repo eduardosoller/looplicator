@@ -1,82 +1,57 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { secondary } from "../Fonts";
-import { getProducts, type Product } from "services/products";
-import ListenSvg from "../Svg/Listen";
+import { useEffect } from "react";
 import styles from "./styles.module.css";
-import { useEffect, useState } from "react";
-type ButtonProps = {
-  label: string;
-  link: string;
-};
-type ProductCardProps = {
-  id: string;
-  title: string;
-  cover_url: string;
-  price: number;
-};
+import Card from "./components/Card/Card";
+import CardsSkeleton from "./components/Skeleton";
+import { useGetProducts } from "hooks/useGetProducts";
+import { usePagination } from "@/components/Pagination/usePagination";
+import Pagination from "@/components/Pagination";
+export default function ProductList({
+  limit = 12,
+  pagination = true,
+}: {
+  limit: number;
+  pagination: boolean;
+}) {
+  const { page, changePage, nextPage, previousPage } = usePagination(limit);
 
-export default function ProductList({ limit }: { limit?: number }) {
-  const [products, setProducts] = useState([]);
+  const { data, error } = useGetProducts({
+    limit: limit,
+    page: page,
+  });
+
   useEffect(() => {
-    getProducts().then((response) => {
-      setProducts(limit ? response.slice(0, limit) : response);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  function CardButton({ label, link }: ButtonProps) {
-    return (
-      <Link href={link}>
-        <button className={styles.cardbutton}>
-          <ListenSvg width={35} height={30} color="#084cf9" />
-          {label}
-        </button>
-      </Link>
-    );
-  }
-  function ProductCard({ id, title, cover_url, price }: ProductCardProps) {
-    return (
-      <div className="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12">
-        <div className={`${styles.productcard} card`}>
-          {price == 0.0 && (
-            <div className={`${styles.free} col`}>FREE · FREE · FREE</div>
-          )}
-          <div className="card-image-top">
-            <Image
-              src={cover_url}
-              style={{ width: "100%", height: "100%" }}
-              alt="cover"
-              width={235}
-              height={235}
-              unoptimized
-            />
-          </div>
-          <div className="card-body">
-            <h4 className={styles.title}>{title}</h4>
-            <p className={`${secondary.className} ${styles.price}`}>
-              $ {price}
-            </p>
-            <CardButton label="Listen to tracks" link={`/pack/${id}`} />
-          </div>
-        </div>
-      </div>
-    );
-  }
+    console.log("ProductList(page)", page, limit, data);
+  }, [page, limit, data]);
+  if (error) return <p className="text-center">Ocorreu um erro.({error})</p>;
   return (
     <section>
       <div className="container">
-        <div className={`${styles.productlist} row g-4 card-group`}>
-          {products.map((item: Product, index: number) => (
-            <ProductCard
-              id={item.id}
-              key={index}
-              title={item.title}
-              cover_url={item.thumbs[280]}
-              price={item.price}
-            />
-          ))}
+        <div className={`${styles.product__list} row g-4`}>
+          {!data ? (
+            <CardsSkeleton total={limit} />
+          ) : (
+            data.items.map((item: Product, index: number) => (
+              <Card
+                id={item.id}
+                key={index}
+                title={item.title}
+                cover_url={item.thumbs[280]}
+                price={item.price}
+              />
+            ))
+          )}
         </div>
+        {pagination === true && data && (
+          <div className="row">
+            <Pagination
+              pageCount={data.pageCount}
+              onNextPage={nextPage}
+              onPrevPage={previousPage}
+              currentPage={page}
+              changePage={changePage}
+            />
+          </div>
+        )}
       </div>
     </section>
   );

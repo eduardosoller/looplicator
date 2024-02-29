@@ -1,0 +1,13 @@
+.skeleton {
+  display: block;
+  animation: skeleton-loading 0.8s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--gray700);
+  }
+  100% {
+    background-color: var(--gray600);
+  }
+}

@@ -1,11 +1,11 @@
-import { promises as fs } from "fs";
-import path from 'path';
-
 export async function GET(request: Request,
   { params }: { params: { id: string } }) {
-  const url = path.join(process.cwd(), 'public', '/json/demo-store.json')
-  const file = await fs.readFile(url, "utf8");
-  const data = JSON.parse(file);
+  const response = await fetch('https://looplipacker.s3.amazonaws.com/looplishop.json')
+  if (!response.ok) {
+    return Response.error()
+  }
+  const data = await response.json()
   const details = data[params.id]
+  details.id = params.id
   return Response.json(details)
 }

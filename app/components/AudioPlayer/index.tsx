@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer, { type WaveSurferOptions } from "wavesurfer.js";
 import PlaySvg from "../Svg/Play";
@@ -7,17 +8,13 @@ import PlayerLoaderSvg from "../Svg/PlayerLoader";
 import { secondary } from "../Fonts";
 import "./styles.css";
 
-type Playlist = {
-  title: string;
-  url: string;
-};
 export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
   const waveformRef = useRef<HTMLDivElement>(null);
   const wavesurfer = useRef<WaveSurfer | null>(null);
   const [playing, setPlaying] = useState<boolean>(false);
   const [tracks] = useState<Playlist[]>(playlist);
-  const [currentTrack, setCurrentTrack] = useState<number>(0);
-  const [loadingTrack, setLoadingTrack] = useState<boolean>(true);
+  const [currentTrack, setCurrentTrack] = useState<number | null>(null);
+  const [loadingTrack, setLoadingTrack] = useState<boolean>();
   const [error, setError] = useState("");
 
   const waveSurferOptions = (ref: any): WaveSurferOptions => {
@@ -36,12 +33,13 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
   useEffect(() => {
     const options = waveSurferOptions(waveformRef.current);
     wavesurfer.current = WaveSurfer.create(options);
-    handleToggleTrack(tracks[0].url, false, 0);
     return () => {
       wavesurfer.current && wavesurfer.current.destroy();
     };
   }, []);
-
+  useEffect(() => {
+    console.log("currentTrack", currentTrack, typeof currentTrack);
+  }, [currentTrack]);
   wavesurfer.current?.once("load", () => {
     setLoadingTrack(true);
   });
@@ -53,6 +51,8 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
   });
 
   const handlePlayPause = () => {
+    if (currentTrack === null) handleToggleTrack(tracks[0].url, false, 0);
+
     setPlaying(!playing);
     wavesurfer.current && wavesurfer.current?.playPause();
   };
@@ -65,6 +65,7 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
       wavesurfer.current.seekTo(0);
       setCurrentTrack(index);
       setError("");
+
       wavesurfer.current
         .load(track_url)
         .then(() => {
@@ -85,7 +86,7 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
     <div className="player">
       <div className="waveform" ref={waveformRef}>
         <div className={`${secondary.className} track-title`}>
-          {tracks[currentTrack].title}
+          {currentTrack !== null && tracks[currentTrack].title}
         </div>
         <div className={`${secondary.className} status`}>{error}</div>
         <div className="controls">
@@ -106,7 +107,7 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
         {playlist.map((item: any, index: number) => (
           <div
             onClick={() => handleToggleTrack(item.url, true, index)}
-            className={"track " + (currentTrack === index && "current")}
+            className={"track" + (currentTrack === index ? " current" : "")}
             key={item.title}
           >
             {item.title}
