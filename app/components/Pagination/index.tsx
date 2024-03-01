@@ -46,7 +46,7 @@ export default function Pagination({
           /> */}
           <input
             className={styles.input}
-            value={`${currentPage} de ${pageCount}`}
+            value={`${currentPage} / ${pageCount}`}
             disabled
           />
           <button

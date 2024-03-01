@@ -2,7 +2,7 @@ export async function GET(request: Request,
   { params }: { params: { options: number[] } }): Promise<Response> {
   try {
     console.time('fetch json')
-    const response = await fetch('https://looplipacker.s3.amazonaws.com/looplishop.json')
+    const response = await fetch('https://looplipacker.s3.amazonaws.com/looplishop.json', { next: { revalidate: 86400, tags: ['products'] } })
     if (!response.ok) {
       return Response.error()
     }
