@@ -63,7 +63,7 @@ export default function Details({ params }: { params: { id: string } }) {
           )}
         </div>
       </section>
-      <ProductList limit={4} pagination={false} />
+      <ProductList limit={4} pagination={false} order="random" />
     </>
   );
 }

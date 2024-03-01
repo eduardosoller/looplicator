@@ -1,27 +1,27 @@
 import { useEffect } from "react";
-import styles from "./styles.module.css";
-import Card from "./components/Card/Card";
-import CardsSkeleton from "./components/Skeleton";
-import { useGetProducts } from "hooks/useGetProducts";
-import { usePagination } from "@/components/Pagination/usePagination";
+import Card from "@/components/Card/Card";
 import Pagination from "@/components/Pagination";
+import { usePagination } from "@/components/Pagination/usePagination";
+import { useGetProducts } from "hooks/useGetProducts";
+import CardsSkeleton from "./components/Skeleton";
+import styles from "./styles.module.css";
 export default function ProductList({
   limit = 12,
   pagination = true,
+  order,
 }: {
   limit?: number;
   pagination?: boolean;
+  order?: string;
 }) {
   const { page, changePage, nextPage, previousPage } = usePagination(limit);
 
   const { data, error } = useGetProducts({
     limit: limit,
     page: page,
+    order: order,
   });
 
-  useEffect(() => {
-    console.log("ProductList(page)", page, limit, data);
-  }, [page, limit, data]);
   if (error) return <p className="text-center">Ocorreu um erro.({error})</p>;
   return (
     <section>
