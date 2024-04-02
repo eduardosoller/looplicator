@@ -25,14 +25,14 @@ test("renders subtitle", () => {
   ).toBeInTheDocument();
 });
 
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: (
-    props: JSX.IntrinsicAttributes &
-      ClassAttributes<HTMLImageElement> &
-      ImgHTMLAttributes<HTMLImageElement>
-  ) => <img {...props} />,
-}));
+// jest.mock("next/image", () => ({
+//   __esModule: true,
+//   default: (
+//     props: JSX.IntrinsicAttributes &
+//       ClassAttributes<HTMLImageElement> &
+//       ImgHTMLAttributes<HTMLImageElement>
+//   ) => <img {...props} />,
+// }));
 test("renders image", () => {
   render(<Banner />);
   const image = screen.getByAltText("home-banner") as HTMLImageElement;
