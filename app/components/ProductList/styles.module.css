@@ -1,3 +1,31 @@
 .product__list {
-  padding: 2em 0;
+  padding: 0 0 1.5em 0;
+  color: var(--soller400);
+}
+.product__list .title {
+  margin: 0;
+  color: var(--soller400);
+}
+.button_wrapper {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(0% + 15px) 100%,
+    0 calc(100% - 15px)
+  );
+  background-color: var(--soller400);
+  padding: 0.1em;
+}
+.button {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(0% + 15px) 100%,
+    0 calc(100% - 15px)
+  );
+  background-color: var(--gray800);
+  padding: 0.8em;
+  color: var(--soller400);
 }

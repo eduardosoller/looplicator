@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Banner />
-      <ProductList />
+      <ProductList limit={4} title="LOOPS OF THE MONTH" />
     </>
   );
 }

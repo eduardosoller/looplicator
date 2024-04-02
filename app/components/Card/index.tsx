@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { secondary } from "@/components/Fonts";
 import styles from "./styles.module.css";
-import CardButton from "../../components/CardButton/CardButton";
+import CardButton from "../CardButton/CardButton";
 export default function Card({
   id,
   title,
@@ -9,11 +9,13 @@ export default function Card({
   price,
 }: ProductCardProps) {
   return (
-    <div className="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+    <div className="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxl-3 pb-4">
       <div className={`${styles.product__card__wrapper} h-100`}>
         <div className={`${styles.product__card} card h-100`}>
           {price == 0.0 && (
-            <div className={`${styles.free} col`}>FREE · FREE · FREE</div>
+            <div className={`${styles.free} col`}>
+              FREE · FREE · FREE · FREE · FREE
+            </div>
           )}
           <div className={`${styles.image} card-image-top`}>
             <Image

@@ -1,11 +1,14 @@
 .footer {
-  margin-top: 2em;
+  display: flex;
+  margin-top: auto;
   font-size: 0.8em;
   letter-spacing: 1px;
   color: var(--soller100);
+  width: 100%;
   background-color: var(--soller900);
   padding: 1em 0;
   text-transform: lowercase;
+  align-self: self-end;
 }
 .left,
 .right {

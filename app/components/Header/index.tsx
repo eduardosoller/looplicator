@@ -21,6 +21,7 @@ export default function Header() {
               <a
                 href="https://soundcloud.com/looplicator"
                 target="_blank"
+                rel="noreferrer noopener"
                 title="Soundcloud"
               >
                 <SoundcloudSvg color="#084cf9" width={40} height={40} />
@@ -28,6 +29,7 @@ export default function Header() {
               <a
                 href="https://instagram.com/looplicator"
                 target="_blank"
+                rel="noreferrer noopener"
                 title="Instagram"
               >
                 <InstagramSvg color="#084cf9" width={32} height={32} />
@@ -35,6 +37,7 @@ export default function Header() {
               <a
                 href="https://youtube.com/@looplicator"
                 target="_blank"
+                rel="noreferrer noopener"
                 title="Youtube"
               >
                 <YoutubeSvg color="#084cf9" width={50} height={50} />

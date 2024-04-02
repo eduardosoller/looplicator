@@ -8,11 +8,13 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const config: Config = {
+  preset: 'ts-jest',
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
-  }
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy', // Para lidar com arquivos CSS
+  },
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 }

@@ -1,7 +1,8 @@
-import "./styles.css";
+import styles from "./styles.module.css";
 import DownloadSvg from "../Svg/Download";
 import StripeSvg from "../Svg/Stripe";
 type Icons = "download" | "pay";
+
 const getIcon = (iconName: Icons) => {
   switch (iconName) {
     case "download":
@@ -18,13 +19,13 @@ export default function LinkButton({
 }: {
   url: string;
   label: string;
-  icon: Icons;
+  icon?: Icons;
 }) {
   return (
     <a href={url}>
-      <button className="download-button" role="button">
+      <button className={styles["link-button"]} role="button">
         {label}
-        {getIcon(icon)}
+        {icon && getIcon(icon)}
       </button>
     </a>
   );

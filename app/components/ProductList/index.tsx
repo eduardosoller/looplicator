@@ -1,16 +1,20 @@
 import { useEffect } from "react";
-import Card from "@/components/Card/Card";
+import Card from "@/components/Card";
 import Pagination from "@/components/Pagination";
 import { usePagination } from "@/components/Pagination/usePagination";
-import { useGetProducts } from "hooks/useGetProducts";
+import { useGetProducts } from "@/hooks/useGetProducts";
 import CardsSkeleton from "./components/Skeleton";
 import styles from "./styles.module.css";
+import Link from "next/link";
+import LinkButton from "../LinkButton";
 export default function ProductList({
   limit = 12,
-  pagination = true,
+  pagination = false,
+  title,
   order,
 }: {
   limit?: number;
+  title?: string;
   pagination?: boolean;
   order?: string;
 }) {
@@ -24,9 +28,17 @@ export default function ProductList({
 
   if (error) return <p className="text-center">Ocorreu um erro.({error})</p>;
   return (
-    <section>
+    <section className={`${styles.product__list}`}>
       <div className="container">
-        <div className={`${styles.product__list} row g-4`}>
+        <div className="row">
+          <div className="col-12 d-flex justify-content-between align-items-center py-4">
+            {title && (
+              <>
+                <h4 className={styles.title}>{title}</h4>
+                <LinkButton label="VIEW ALL" url="/loops" />
+              </>
+            )}
+          </div>
           {!data ? (
             <CardsSkeleton total={limit} />
           ) : (
@@ -41,7 +53,7 @@ export default function ProductList({
             ))
           )}
         </div>
-        {pagination === true && data && (
+        {pagination && data && (
           <div className="row">
             <Pagination
               pageCount={data.pageCount}

@@ -26,10 +26,10 @@
 
 @media (min-width: 992px) {
   .column-left {
-    padding: 4em 2em 2em 0;
+    padding: 4em 2em 3em 0;
   }
   .column-right {
-    padding: 4em 0 2em 2em;
+    padding: 4em 0 3em 2em;
   }
   .cover {
     align-items: start;

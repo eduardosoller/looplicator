@@ -1,6 +1,6 @@
 .product__card__wrapper {
   background-color: var(--gray600);
-  padding: 1px;
+  padding: 2px;
   clip-path: polygon(
     0 0,
     100% 0,

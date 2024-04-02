@@ -3,7 +3,7 @@
   flex-direction: row;
   background-color: var(--gray800);
 }
-.banner h2.title {
+.banner .title {
   position: relative;
   color: var(--gray100);
   font-size: 2.5em;

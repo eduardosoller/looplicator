@@ -6,7 +6,7 @@ import { secondary } from "@/components/Fonts";
 import LinkButton from "@/components/LinkButton";
 import AudioPlayer from "@/components/AudioPlayer";
 import ProductList from "@/components/ProductList";
-import { useGetDetails } from "hooks/useGetDetails";
+import { useGetDetails } from "@/hooks/useGetDetails";
 import Skeleton from "./Skeleton";
 import styles from "./styles.module.css";
 export default function Details({ params }: { params: { id: string } }) {
@@ -63,7 +63,7 @@ export default function Details({ params }: { params: { id: string } }) {
           )}
         </div>
       </section>
-      <ProductList limit={4} pagination={false} order="random" />
+      <ProductList limit={4} order="random" title="HEY, CHECK THIS OUT" />
     </>
   );
 }
