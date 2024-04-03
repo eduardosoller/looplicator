@@ -1,19 +1,14 @@
-import Link from "next/link";
-import { headers } from "next/headers";
+import NotFoundSvg from "@/components/Svg/NotFound";
 import LinkButton from "@/components/LinkButton";
 export default async function NotFound() {
-  const headersList = headers();
-  const domain = headersList.get("host");
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-12 text-center not-found">
-          <h3>404 | NOT FOUND</h3>
-          <p>{domain}</p>
-          <p>
-            <LinkButton url="/" label="Go to Home" />
-          </p>
-        </div>
+    <div className="d-flex justify-content-center align-items-center">
+      <div className="not-found">
+        <NotFoundSvg width={136} height={150} color="#084cf9" />
+        <h3 className="my-5">404 | NOT FOUND</h3>
+        <p>
+          <LinkButton url="/" label="Go to Home" />
+        </p>
       </div>
     </div>
   );

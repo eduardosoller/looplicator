@@ -5,7 +5,7 @@
   letter-spacing: 1px;
   color: var(--soller100);
   width: 100%;
-  background-color: var(--soller900);
+  background-color: rgb(1, 24, 97, 0.7);
   padding: 1em 0;
   text-transform: lowercase;
   align-self: self-end;

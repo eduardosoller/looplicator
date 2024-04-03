@@ -1,4 +1,3 @@
-import Image from "next/image";
 import YoutubeSvg from "@/components/Svg/Youtube";
 import SoundcloudSvg from "@/components/Svg/Soundcloud";
 import InstagramSvg from "@/components/Svg/Instagram";

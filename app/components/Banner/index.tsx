@@ -17,7 +17,7 @@ export default function Banner() {
               </h2>
             </div>
           </div>
-          <div className="col-md-12 col-lg-6">
+          <div className={`${styles["image-wrapper"]} col-md-12 col-lg-6`}>
             <Image
               src="/img/home.png"
               width="500"

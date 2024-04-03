@@ -9,6 +9,7 @@ import ProductList from "@/components/ProductList";
 import { useGetDetails } from "@/hooks/useGetDetails";
 import Skeleton from "./Skeleton";
 import styles from "./styles.module.css";
+import { GetServerSideProps } from "next";
 export default function Details({ params }: { params: { id: string } }) {
   const { data, error } = useGetDetails(params.id);
 

@@ -53,7 +53,8 @@ body {
 }
 .not-found {
   display: flex;
+  align-items: center;
   flex-direction: column;
   color: var(--soller400);
-  margin: auto 0;
+  padding: 3em 0;
 }
