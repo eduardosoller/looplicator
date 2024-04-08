@@ -1,0 +1,55 @@
+import Image from "next/image";
+import { secondary } from "@/components/Fonts";
+import ProductList from "@/components/ProductList";
+import Skeleton from "./Skeleton";
+import styles from "./styles.module.css";
+const api_url = process.env.NEXT_PUBLIC_API_URL;
+
+export default async function Download({
+  params,
+}: {
+  params: { id: string; hash: string };
+}) {
+  const response = await fetch(`${api_url}/products/details/${params.id}`);
+  const data = await response.json();
+
+  return (
+    <>
+      <section className={styles.details}>
+        <div className="container">
+          {data ? (
+            <div className="row">
+              <div className="col-12 col-lg-6">
+                <div className={styles["column-left"]}>
+                  <div className={styles.cover}>
+                    <Image
+                      src={data.thumbs[650]}
+                      alt={"cover"}
+                      width={400}
+                      height={400}
+                      style={{ width: "100%", height: "auto" }}
+                      priority
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-lg-6">
+                <div className={styles["column-right"]}>
+                  <h3 className={styles.title}>{data.title}</h3>
+                  <p className={`${secondary.className} ${styles.subtitle}`}>
+                    {`${data.tracks.length} tracks | ${
+                      data.price === 0 ? "FREE" : "$" + data.price
+                    }`}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Skeleton />
+          )}
+        </div>
+      </section>
+      <ProductList limit={4} order="random" title="HEY, CHECK THIS OUT" />
+    </>
+  );
+}

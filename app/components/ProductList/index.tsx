@@ -1,32 +1,36 @@
-import { useEffect } from "react";
 import Card from "@/components/Card";
 import Pagination from "@/components/Pagination";
-import { usePagination } from "@/components/Pagination/usePagination";
-import { useGetProducts } from "@/hooks/useGetProducts";
 import CardsSkeleton from "./components/Skeleton";
 import styles from "./styles.module.css";
-import Link from "next/link";
 import LinkButton from "../LinkButton";
-export default function ProductList({
+import { notFound } from "next/navigation";
+const api_url = process.env.NEXT_PUBLIC_API_URL;
+
+export default async function ProductList({
+  searchParams,
   limit = 12,
   pagination = false,
   title,
   order,
+  viewAllButton = true,
 }: {
+  searchParams?: { page: number } | undefined;
   limit?: number;
   title?: string;
   pagination?: boolean;
   order?: string;
+  viewAllButton?: boolean;
 }) {
-  const { page, changePage, nextPage, previousPage } = usePagination(limit);
-
-  const { data, error } = useGetProducts({
-    limit: limit,
-    page: page,
-    order: order,
-  });
-
-  if (error) return <p className="text-center">Ocorreu um erro.({error})</p>;
+  const page: number = searchParams?.page ? Number(searchParams.page) : 1;
+  let data;
+  const response = await fetch(
+    `${api_url}/products/${limit}/${page}/${order}`,
+    { cache: "no-cache" }
+  );
+  if (!response.ok) {
+    notFound();
+  }
+  data = await response.json();
   return (
     <section className={`${styles.product__list}`}>
       <div className="container">
@@ -34,8 +38,8 @@ export default function ProductList({
           <div className="col-12 d-flex justify-content-between align-items-center py-4">
             {title && (
               <>
-                <h4 className={styles.title}>{title}</h4>
-                <LinkButton label="VIEW ALL" url="/loops" />
+                <h3 className={styles.title}>{title}</h3>
+                {viewAllButton && <LinkButton label="VIEW ALL" url="/loops" />}
               </>
             )}
           </div>
@@ -57,10 +61,9 @@ export default function ProductList({
           <div className="row">
             <Pagination
               pageCount={data.pageCount}
-              onNextPage={nextPage}
-              onPrevPage={previousPage}
-              currentPage={page}
-              changePage={changePage}
+              hasNextPage={data.hasNextPage}
+              hasPrevPage={data.hasPrevPage}
+              currentPage={data.page}
             />
           </div>
         )}

@@ -1,58 +1,48 @@
 "use client";
-
-import { useEffect } from "react";
+import { notFound, useRouter } from "next/navigation";
 import styles from "./styles.module.css";
-import { usePagination } from "./usePagination";
 import SquareArrowSvg from "@/components/Svg/SquareArrow";
 type PaginationProps = {
   currentPage: number;
   pageCount: number;
-  onPrevPage: () => void;
-  onNextPage: () => void;
-  changePage: (pageNumber: number) => void;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
 };
 export default function Pagination({
   currentPage,
   pageCount,
-  onNextPage,
-  onPrevPage,
-  changePage,
+  hasNextPage,
+  hasPrevPage,
 }: PaginationProps) {
-  useEffect(() => {
-    console.log("Pagination", currentPage);
-  }, [currentPage]);
-
-  function handleChangePage(pageNumber: number) {
-    if (pageNumber > pageCount) return;
-    changePage(pageNumber);
+  const router = useRouter();
+  function onPrevPage() {
+    currentPage - 1 < 1
+      ? notFound()
+      : router.push("?page=" + (currentPage - 1));
   }
-
+  function onNextPage() {
+    currentPage + 1 > pageCount
+      ? notFound()
+      : router.push("?page=" + (currentPage + 1));
+  }
   return (
     <div className="col-12 d-flex justify-content-end">
       <div className={styles.pagination_wrapper}>
         <div className={styles.pagination}>
           <button
-            disabled={currentPage <= 1}
+            disabled={!hasPrevPage}
             onClick={() => onPrevPage()}
             className={styles.button_pagination__prev}
           >
             <SquareArrowSvg width={30} height={30} color="#084cf9" />
           </button>
-          {/* <input
-            className={styles.input}
-            value={currentPage}
-            onChange={(e) => {
-              handleChangePage(Number(e.target.value));
-            }}
-            type="text"
-          /> */}
           <input
             className={styles.input}
             value={`${currentPage} / ${pageCount}`}
             disabled
           />
           <button
-            disabled={currentPage >= pageCount}
+            disabled={!hasNextPage}
             onClick={() => onNextPage()}
             className={styles.button_pagination__next}
           >

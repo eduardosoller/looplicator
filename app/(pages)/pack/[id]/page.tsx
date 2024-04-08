@@ -1,21 +1,31 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { secondary } from "@/components/Fonts";
 import LinkButton from "@/components/LinkButton";
 import AudioPlayer from "@/components/AudioPlayer";
 import ProductList from "@/components/ProductList";
-import { useGetDetails } from "@/hooks/useGetDetails";
 import Skeleton from "./Skeleton";
 import styles from "./styles.module.css";
-import { GetServerSideProps } from "next";
-export default function Details({ params }: { params: { id: string } }) {
-  const { data, error } = useGetDetails(params.id);
+import { Metadata } from "next";
+const api_url = process.env.NEXT_PUBLIC_API_URL;
 
-  useEffect(() => {
-    // console.log("DETAILS DATA", data);
-  }, [data]);
+type Props = {
+  params: { id: string };
+};
+
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const { params } = props;
+  const response = await fetch(`${api_url}/products/details/${params.id}`);
+  const data = await response.json();
+  const type = data.price === 0 ? "FREE" : "PREMIUM";
+  return {
+    title: `Loop pack | ${data.title} | ${type} Loops | Looplicator`,
+  };
+};
+
+export default async function Details({ params }: { params: { id: string } }) {
+  const response = await fetch(`${api_url}/products/details/${params.id}`);
+  const data = await response.json();
+
   const buttonLink = data?.download_url ? data.download_url : data?.payment_url;
   const buttonLabel = data?.download_url ? "DOWNLOAD" : "PAY $" + data?.price;
   const buttonIcon = data?.download_url ? "download" : "pay";

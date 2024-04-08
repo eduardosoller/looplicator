@@ -4,10 +4,11 @@
   background-color: var(--gray800);
   position: relative;
 }
-.banner .title {
+.title {
   position: relative;
   color: var(--gray100);
   font-size: 2.5em;
+  line-height: 1.5 !important;
   min-height: 120px;
   padding: 2em 0 0 0;
 }
@@ -21,6 +22,7 @@
 }
 .float span {
   color: var(--soller400);
+  border-bottom: 3px solid var(--soller400);
 }
 .subtitle {
   font-size: 15px;

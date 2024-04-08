@@ -1,0 +1,11 @@
+.card {
+  border-radius: 0;
+  background-color: var(--gray800);
+}
+.image {
+  aspect-ratio: 1;
+  margin: 1em 1em 0 1em;
+}
+.cover {
+  aspect-ratio: 1;
+}

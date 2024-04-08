@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { secondary } from "../Fonts";
 import styles from "./styles.module.css";
+import Link from "next/link";
 export default function Banner() {
   return (
     <section className={styles.banner}>
@@ -12,8 +13,11 @@ export default function Banner() {
                 for the underground artists
               </h3>
               <h2 className={styles.float}>
-                Break free from the ordinary and <span>explore</span> our
-                collection of original industrial and dark ambient loops.
+                Break free from the ordinary and{" "}
+                <Link href="/loops">
+                  <span>explore</span>
+                </Link>{" "}
+                our collection of original industrial and dark ambient loops.
               </h2>
             </div>
           </div>

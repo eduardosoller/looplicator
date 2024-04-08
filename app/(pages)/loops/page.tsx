@@ -1,9 +1,17 @@
-"use client";
 import ProductList from "@/components/ProductList";
-export default function Loops() {
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Looplicator - Loops Packs",
+};
+export default function Loops({ searchParams }: any) {
   return (
     <>
-      <ProductList title="EXPLORE OUR PACKS" pagination />
+      <ProductList
+        title="EXPLORE OUR PACKS"
+        searchParams={searchParams}
+        viewAllButton={false}
+        pagination
+      />
     </>
   );
 }
