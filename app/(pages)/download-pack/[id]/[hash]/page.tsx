@@ -48,7 +48,7 @@ export default async function Download({
                     </p>
                     <LinkButton
                       label="DOWNLOAD"
-                      url={`${params.hash}.zip`}
+                      url={`https://looplipacker.s3.amazonaws.com/${params.hash}.zip`}
                       icon="download"
                     />
                   </div>
