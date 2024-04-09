@@ -8,6 +8,7 @@ export default function Loops({ searchParams }: any) {
     <>
       <ProductList
         title="EXPLORE OUR PACKS"
+        order="desc"
         searchParams={searchParams}
         viewAllButton={false}
         pagination

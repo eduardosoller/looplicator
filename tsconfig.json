@@ -21,7 +21,7 @@
     ],
     "paths": {
       "@/components/*": ["app/components/*"],
-      "@/hooks/*": ["app/hooks/*"]
+      "@/services/*": ["app/services/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types/global.d.ts", "__tests__/*.ts", "__tests__/Banner.test.tsx"],

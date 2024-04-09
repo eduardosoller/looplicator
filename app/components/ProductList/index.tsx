@@ -3,9 +3,7 @@ import Pagination from "@/components/Pagination";
 import CardsSkeleton from "./components/Skeleton";
 import styles from "./styles.module.css";
 import LinkButton from "../LinkButton";
-import { notFound } from "next/navigation";
-const api_url = process.env.NEXT_PUBLIC_API_URL;
-
+import { getProducts } from "@/services/product";
 export default async function ProductList({
   searchParams,
   limit = 12,
@@ -22,15 +20,7 @@ export default async function ProductList({
   viewAllButton?: boolean;
 }) {
   const page: number = searchParams?.page ? Number(searchParams.page) : 1;
-  let data;
-  const response = await fetch(
-    `${api_url}/products/${limit}/${page}/${order}`,
-    { cache: "no-cache" }
-  );
-  if (!response.ok) {
-    notFound();
-  }
-  data = await response.json();
+  const data = await getProducts(limit, page, order);
   return (
     <section className={`${styles.product__list}`}>
       <div className="container">

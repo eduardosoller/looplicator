@@ -16,6 +16,13 @@ declare global {
     download_url: string | null;
     tracks: Playlist[]
   };
+  type ProductsResponse = {
+    items: Product[];
+    page: number;
+    pageCount: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+  }
   type getProductsProps = {
     limit: number;
   }

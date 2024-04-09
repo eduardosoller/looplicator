@@ -5,8 +5,8 @@ import AudioPlayer from "@/components/AudioPlayer";
 import ProductList from "@/components/ProductList";
 import Skeleton from "./Skeleton";
 import styles from "./styles.module.css";
+import { getDetails } from "@/services/product";
 import { Metadata } from "next";
-const api_url = process.env.NEXT_PUBLIC_API_URL;
 
 type Props = {
   params: { id: string };
@@ -14,8 +14,7 @@ type Props = {
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const { params } = props;
-  const response = await fetch(`${api_url}/products/details/${params.id}`);
-  const data = await response.json();
+  const data = await getDetails(params.id);
   const type = data.price === 0 ? "FREE" : "PREMIUM";
   return {
     title: `Loop pack | ${data.title} | ${type} Loops | Looplicator`,
@@ -23,9 +22,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 };
 
 export default async function Details({ params }: { params: { id: string } }) {
-  const response = await fetch(`${api_url}/products/details/${params.id}`);
-  const data = await response.json();
-
+  const data = await getDetails(params.id);
   const buttonLink = data?.download_url ? data.download_url : data?.payment_url;
   const buttonLabel = data?.download_url ? "DOWNLOAD" : "PAY $" + data?.price;
   const buttonIcon = data?.download_url ? "download" : "pay";

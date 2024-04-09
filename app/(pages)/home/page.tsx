@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Banner />
-      <ProductList limit={4} title="PACKS OF THE MONTH" />
+      <ProductList limit={4} title="PACKS OF THE MONTH" order="desc" />
     </>
   );
 }
