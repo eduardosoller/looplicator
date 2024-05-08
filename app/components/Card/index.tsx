@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { secondary } from "@/components/Fonts";
 import styles from "./styles.module.css";
-import CardButton from "../CardButton/CardButton";
+import CardButton from "@/components/CardButton";
 export default function Card({
   id,
   title,
@@ -9,11 +9,11 @@ export default function Card({
   price,
 }: ProductCardProps) {
   return (
-    <div className="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxl-3 pb-4">
-      <div className={`${styles.product__card__wrapper} h-100`}>
-        <div className={`${styles.product__card} card h-100`}>
+    <div className="col col-12 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
+      <div className={`${styles.card__wrapper}`}>
+        <div className={`${styles.card}`}>
           {price == 0.0 && (
-            <div className={`${styles.free} col`}>
+            <div className={`${styles.tag} col`}>
               FREE · FREE · FREE · FREE · FREE
             </div>
           )}
@@ -27,14 +27,14 @@ export default function Card({
               unoptimized
             />
           </div>
-          <div className="card-body">
+          <div className={styles.body}>
             <h4 className={styles.title}>{title}</h4>
             <p className={`${secondary.className} ${styles.price}`}>
               $ {price}
             </p>
           </div>
-          <div className={`${styles.card__footer} card-footer`}>
-            <CardButton label="Listen to tracks" link={`/pack/${id}`} />
+          <div className={`${styles.footer}`}>
+            <CardButton label="Listen" link={`/pack/${id}`} />
           </div>
         </div>
       </div>

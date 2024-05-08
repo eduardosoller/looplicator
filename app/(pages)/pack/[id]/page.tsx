@@ -51,7 +51,7 @@ export default async function Details({ params }: { params: { id: string } }) {
                 <div className={styles["column-right"]}>
                   <h3 className={styles.title}>{data.title}</h3>
                   <p className={`${secondary.className} ${styles.subtitle}`}>
-                    {`${data.tracks.length} tracks | ${
+                    {`${data.tracks.length} loops | ${
                       data.price === 0 ? "FREE" : "$" + data.price
                     }`}
                   </p>

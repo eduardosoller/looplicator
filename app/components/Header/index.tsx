@@ -1,11 +1,11 @@
 import YoutubeSvg from "@/components/Svg/Youtube";
 import SoundcloudSvg from "@/components/Svg/Soundcloud";
 import InstagramSvg from "@/components/Svg/Instagram";
-import LogoSvg from "../Svg/Logo";
+import LogoSvg from "@/components/Svg/Logo";
 import styles from "./styles.module.css";
 export default function Header() {
   return (
-    <header>
+    <header className={styles.header}>
       <div className="container">
         <div className="row">
           <div className="col">

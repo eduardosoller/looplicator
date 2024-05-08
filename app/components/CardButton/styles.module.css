@@ -1,4 +1,15 @@
-.card__button {
+.button-wrapper {
+  padding: 2px;
+  background-color: var(--soller400);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(0% + 26px) 100%,
+    0 calc(100% - 26px)
+  );
+}
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +19,7 @@
   font-size: 14px;
   line-height: 14px;
   padding: 1em;
-  color: var(--gray800);
+  color: var(--soller400);
   border: 0;
   text-transform: uppercase;
   flex-wrap: nowrap;
@@ -19,16 +30,16 @@
     calc(0% + 25px) 100%,
     0 calc(100% - 25px)
   );
-  background: var(--soller400);
+  background: var(--gray800);
 }
-.card__button svg {
+.button svg {
   margin-right: 0.3em;
 }
 @media (max-width: 768px) {
-  .card__button {
+  .button {
     font-size: 0.7em;
   }
-  .card__button svg {
+  .button svg {
     transform: scale(0.8);
   }
 }

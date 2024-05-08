@@ -1,3 +1,6 @@
+.header {
+  border-bottom: 1px solid var(--soller400);
+}
 .logo {
   display: flex;
   justify-content: center;
@@ -11,6 +14,9 @@
 }
 .social a {
   margin: 0 1em 0 1em;
+}
+.social a:last-child {
+  margin: 0 0 0 1em;
 }
 @media (min-width: 768px) {
   .logo {

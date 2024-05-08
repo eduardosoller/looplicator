@@ -9,7 +9,7 @@
 }
 .subtitle {
   color: var(--green-light);
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .cover {
   display: flex;

@@ -4,10 +4,12 @@ import styles from "./styles.module.css";
 export default function CardButton({ label, link }: ButtonProps) {
   return (
     <Link href={link}>
-      <button className={styles.card__button}>
-        <ListenSvg width={35} height={30} color="#202422" />
-        {label}
-      </button>
+      <div className={styles["button-wrapper"]}>
+        <button className={styles.button}>
+          <ListenSvg width={35} height={30} color="#084cf9" />
+          {label}
+        </button>
+      </div>
     </Link>
   );
 }

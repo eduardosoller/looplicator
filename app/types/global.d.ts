@@ -16,6 +16,12 @@ declare global {
     download_url: string | null;
     tracks: Playlist[]
   };
+  type Testimonial = {
+    name: string;
+    comment: string;
+    avatar_url: string;
+    date: string
+  }
   type ProductsResponse = {
     items: Product[];
     page: number;

@@ -1,4 +1,5 @@
 .banner {
+  margin-top: 0;
   display: flex;
   flex-direction: row;
   background-color: var(--gray800);
@@ -25,11 +26,12 @@
   border-bottom: 3px solid var(--soller400);
 }
 .subtitle {
-  font-size: 15px;
+  text-transform: capitalize;
+  font-size: 16px;
   color: var(--green-light);
   position: absolute;
   left: 0;
-  top: -25px;
+  top: -24px;
   z-index: 2;
 }
 .text {
@@ -45,7 +47,7 @@
 .image {
   width: 100%;
   height: 100%;
-  opacity: 0.4;
+  opacity: 0.15;
   padding: 2em;
 }
 @media (min-width: 360px) and (max-width: 992px) {

@@ -8,6 +8,7 @@
   );
   background-color: var(--soller400);
   padding: 0.1em;
+  margin-bottom: 1em;
 }
 .pagination {
   clip-path: polygon(

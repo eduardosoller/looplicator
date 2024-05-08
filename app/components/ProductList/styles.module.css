@@ -1,8 +1,4 @@
-.product__list {
-  padding: 0 0 1.5em 0;
-  color: var(--soller400);
-}
-.product__list .title {
+.title {
   font-size: 1.5em;
   margin: 0;
   color: var(--soller400);

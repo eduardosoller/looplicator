@@ -55,3 +55,6 @@ body {
   color: var(--soller400);
   padding: 3em 0;
 }
+/* .row > * {
+  margin-top: 1.5em;
+} */

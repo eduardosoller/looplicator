@@ -1,0 +1,11 @@
+.section {
+  margin-bottom: 3em;
+}
+.number {
+  font-size: 3em;
+  color: var(--soller400);
+}
+.label {
+  font-size: 1.5em;
+  color: var(--gray400);
+}
