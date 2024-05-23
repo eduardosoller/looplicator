@@ -84,7 +84,7 @@
   word-wrap: break-word;
 }
 .text {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--gray400);
 }
 .info {

@@ -21,7 +21,8 @@
     ],
     "paths": {
       "@/components/*": ["app/components/*"],
-      "@/services/*": ["app/services/*"]
+      "@/services/*": ["app/services/*"],
+      "@/types_db": ["types_db"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types/global.d.ts", "__tests__/*.ts", "__tests__/Banner.test.tsx"],

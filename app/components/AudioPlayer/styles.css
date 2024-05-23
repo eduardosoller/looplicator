@@ -18,11 +18,10 @@
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 0.6em;
-  letter-spacing: 0.5px;
+  font-size: 1em;
   color: var(--gray300);
-  background-color: var(--gray600);
-  padding: 0.5em 1em;
+  background-color: rgb(50, 50, 56, 0.5);
+  padding: 0.3em 1em 0.3em 0.5em;
   z-index: 3;
 }
 .controls {
@@ -39,15 +38,19 @@
   height: 308px;
 }
 .playlist .track {
-  letter-spacing: 0.5px;
   cursor: pointer;
   color: var(--gray300);
-  font-size: 0.6em;
-  padding: 0.8em 1em;
+  font-size: 8px;
+  padding: 1em;
   border-bottom: 1px solid var(--gray500);
+  line-height: 16px;
+  text-rendering: optimizeSpeed;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
 }
 .playlist .track.current {
   color: var(--green-light);
+  background-color: var(--gray500);
 }
 /* scrollbar */
 .playlist::-webkit-scrollbar-track {

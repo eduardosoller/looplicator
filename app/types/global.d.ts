@@ -18,8 +18,8 @@ declare global {
   };
   type Testimonial = {
     name: string;
-    comment: string;
-    avatar_url: string;
+    testimonial: string;
+    avatar: string;
     date: string
   }
   type ProductsResponse = {

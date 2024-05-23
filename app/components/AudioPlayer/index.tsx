@@ -14,7 +14,7 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
   const [playing, setPlaying] = useState<boolean>(false);
   const [tracks] = useState<Playlist[]>(playlist);
   const [currentTrack, setCurrentTrack] = useState<number | null>(null);
-  const [loadingTrack, setLoadingTrack] = useState<boolean>();
+  const [loadingTrack, setLoadingTrack] = useState<boolean>(false);
   const [error, setError] = useState("");
 
   const waveSurferOptions = (ref: any): WaveSurferOptions => {
@@ -37,25 +37,18 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
       wavesurfer.current && wavesurfer.current.destroy();
     };
   }, []);
-  useEffect(() => {
-    console.log("currentTrack", currentTrack, typeof currentTrack);
-  }, [currentTrack]);
-  wavesurfer.current?.once("load", () => {
-    setLoadingTrack(true);
-  });
-  wavesurfer.current?.once("ready", () => {
-    setLoadingTrack(false);
-  });
+
+  //plays in loop
   wavesurfer.current?.on("finish", () => {
     wavesurfer.current?.play();
   });
 
   const handlePlayPause = () => {
     if (currentTrack === null) handleToggleTrack(tracks[0].url, false, 0);
-
     setPlaying(!playing);
     wavesurfer.current && wavesurfer.current?.playPause();
   };
+
   const handleToggleTrack = (
     track_url: string,
     autoplay: boolean,
@@ -65,10 +58,11 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
       wavesurfer.current.seekTo(0);
       setCurrentTrack(index);
       setError("");
-
+      setLoadingTrack(true);
       wavesurfer.current
         .load(track_url)
         .then(() => {
+          setLoadingTrack(false);
           if (autoplay) {
             wavesurfer.current?.play();
             setPlaying(true);
@@ -77,8 +71,8 @@ export default function AudioPlayer({ playlist }: { playlist: Playlist[] }) {
         .catch((error) => {
           wavesurfer.current?.empty();
           error.message === "Failed to fetch"
-            ? setError("Erro ao carregar loop")
-            : setError("Ocorreu um erro");
+            ? setError("Error loading track")
+            : setError("There's an error");
         });
     }
   };

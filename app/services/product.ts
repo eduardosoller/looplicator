@@ -7,6 +7,7 @@ const api_url = process.env.NEXT_PUBLIC_API_URL;
 export const getProducts = async (limit: number, page: number, order: string | undefined): Promise<ProductsResponse> => {
   const response = await fetch(
     `${api_url}/products/${limit}/${page}/${order}`,
+    //TODO: testar o cache
     { cache: "no-cache" }
   );
   if (!response.ok) {
@@ -23,8 +24,8 @@ export const getDetails = async (id: string): Promise<Product> => {
   return await response.json();
 }
 
-export const getFeaturedPack = async (): Promise<string> => {
-  const response = await fetch(`${api_url}/featured-pack`, { cache: 'no-store' });
+export const getFeaturedPack = async (): Promise<Product> => {
+  const response = await fetch(`${api_url}/products/featured-pack`, { cache: 'no-store' });
   if (!response.ok) {
     throw NextResponse.json({ error: "Can´t load featured pack" }, { status: 404 })
   }

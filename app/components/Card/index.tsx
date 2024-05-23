@@ -2,6 +2,9 @@ import Image from "next/image";
 import { secondary } from "@/components/Fonts";
 import styles from "./styles.module.css";
 import CardButton from "@/components/CardButton";
+import { Suspense } from "react";
+import Skeleton from "../Skeleton";
+import { formatCurrency } from "utils/helpers";
 export default function Card({
   id,
   title,
@@ -18,19 +21,20 @@ export default function Card({
             </div>
           )}
           <div className={`${styles.image} card-image-top`}>
-            <Image
-              src={cover_url}
-              style={{ width: "100%", height: "auto" }}
-              alt="cover"
-              width={235}
-              height={235}
-              unoptimized
-            />
+            <Suspense fallback={<Skeleton width={300} height={500} />}>
+              <Image
+                src={cover_url}
+                style={{ width: "100%", height: "auto" }}
+                alt="cover"
+                width={235}
+                height={235}
+              />
+            </Suspense>
           </div>
           <div className={styles.body}>
             <h4 className={styles.title}>{title}</h4>
             <p className={`${secondary.className} ${styles.price}`}>
-              $ {price}
+              {formatCurrency(price)}
             </p>
           </div>
           <div className={`${styles.footer}`}>
