@@ -7,7 +7,7 @@ export async function GET(request: Request,
   const { data, error } = await supabase
     .from('packs')
     .select(`*, tracks(id, title, url)`)
-    .eq('id', params.id)
+    .eq('release_id', params.id)
     .limit(1)
     .single()
   if (error) {

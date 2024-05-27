@@ -7,7 +7,7 @@ declare global {
     url: string;
   };
   type Product = {
-    id: string;
+    release_id: string;
     title: string;
     cover_url: string;
     thumbs: { 280: string, 400: string, 650: string }

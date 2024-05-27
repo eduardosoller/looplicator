@@ -44,8 +44,8 @@ export default async function ProductList({
         ) : (
           data.items.map((item: Product, index: number) => (
             <Card
-              id={item.id}
-              key={index}
+              id={item.release_id}
+              key={item.release_id}
               title={item.title}
               cover_url={item.thumbs[280]}
               price={item.price}
