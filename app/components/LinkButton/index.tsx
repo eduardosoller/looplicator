@@ -22,7 +22,7 @@ export default function LinkButton({
   icon?: Icons;
 }) {
   return (
-    <a href={url}>
+    <a href={url} className={styles.link}>
       <button className={styles["link-button"]} role="button">
         {label}
         {icon && getIcon(icon)}

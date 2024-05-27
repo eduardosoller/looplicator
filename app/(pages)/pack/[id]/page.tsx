@@ -7,6 +7,7 @@ import Skeleton from "./Skeleton";
 import styles from "./styles.module.css";
 import { getDetails } from "@/services/product";
 import { Metadata } from "next";
+import { ShareButtons } from "@/components/ShareButton";
 
 type Props = {
   params: { id: string };
@@ -62,6 +63,9 @@ export default async function Details({ params }: { params: { id: string } }) {
                       icon={buttonIcon}
                     />
                   )}
+
+                  <ShareButtons />
+
                   <AudioPlayer playlist={data.tracks} />
                 </div>
               </div>
