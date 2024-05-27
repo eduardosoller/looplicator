@@ -14,6 +14,5 @@ export async function GET(request: Request,
     console.log('error', error)
     throw new Error(error.message)
   }
-  console.log('details endpoint data', data)
   return NextResponse.json(data)
 }
