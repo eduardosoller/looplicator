@@ -7,6 +7,7 @@ import Skeleton from "./Skeleton";
 import styles from "./styles.module.css";
 import { getDetails } from "@/services/product";
 import { Metadata } from "next";
+import { formatCurrency } from "utils/helpers";
 import { ShareButtons } from "@/components/ShareButton";
 
 type Props = {
@@ -25,7 +26,9 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 export default async function Details({ params }: { params: { id: string } }) {
   const data = await getDetails(params.id);
   const buttonLink = data?.download_url ? data.download_url : data?.payment_url;
-  const buttonLabel = data?.download_url ? "DOWNLOAD" : "PAY $" + data?.price;
+  const buttonLabel = data?.download_url
+    ? "DOWNLOAD"
+    : "PAY " + formatCurrency(data?.price);
   const buttonIcon = data?.download_url ? "download" : "pay";
 
   return (
@@ -51,11 +54,11 @@ export default async function Details({ params }: { params: { id: string } }) {
               <div className="col-12 col-lg-6">
                 <div className={styles["column-right"]}>
                   <h3 className={styles.title}>{data.title}</h3>
-                  <p className={`${secondary.className} ${styles.subtitle}`}>
+                  <div className={`${secondary.className} ${styles.subtitle}`}>
                     {`${data.tracks.length} loops | ${
-                      data.price === 0 ? "FREE" : "$" + data.price
+                      data.price === 0 ? "FREE PACK" : "PREMIUM PACK"
                     }`}
-                  </p>
+                  </div>
                   {buttonLink && (
                     <LinkButton
                       label={buttonLabel}

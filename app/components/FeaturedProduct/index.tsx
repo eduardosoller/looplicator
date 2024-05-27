@@ -5,8 +5,8 @@ import LinkButton from "../LinkButton";
 import FireSvg from "../Svg/Fire";
 import { getDetails, getFeaturedPack } from "@/services/product";
 export default async function FeaturedProduct() {
-  const response = await getFeaturedPack();
-  const { thumbs, title, tracks, price, id } = await getDetails(response);
+  const { thumbs, title, tracks, price, id } = await getFeaturedPack();
+  //const { thumbs, title, tracks, price, id } = await getDetails(response);
   const type = price === 0 ? "Free" : "Premium";
   return (
     <div className={`col-xl-6 col-lg-12 col-md-12 col-xm-12 ${styles.text}`}>
@@ -23,7 +23,6 @@ export default async function FeaturedProduct() {
                 priority
               />
             </div>
-
             <div className={`${styles["col-center"]}`}>
               <h3 className={styles.title}>{title}</h3>
               <div className={`${secondary.className} ${styles.text}`}>
