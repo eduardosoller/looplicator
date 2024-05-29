@@ -1,37 +1,36 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import { Database } from '@/types_db';
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { cookies } from 'next/headers'
 
-export const createClient = () => {
-  const cookieStore = cookies();
+export function createClient() {
+  const cookieStore = cookies()
 
-  return createServerClient<Database>(
+  return createServerClient(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_ANON_KEY!,
-
     {
       cookies: {
         get(name: string) {
-          return cookieStore.get(name)?.value;
+          return cookieStore.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
           try {
-            cookieStore.set({ name, value, ...options });
+            cookieStore.set({ name, value, ...options })
           } catch (error) {
-            // If the set method is called from a Server Component, an error may occur
-            // This can be ignored if there is middleware refreshing user sessions
+            // The `set` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
           }
         },
-        // The remove method is used to delete a cookie by its name
         remove(name: string, options: CookieOptions) {
           try {
-            cookieStore.set({ name, value: '', ...options });
+            cookieStore.set({ name, value: '', ...options })
           } catch (error) {
-            // If the remove method is called from a Server Component, an error may occur
-            // This can be ignored if there is middleware refreshing user sessions
+            // The `delete` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
           }
-        }
-      }
+        },
+      },
     }
-  );
-};
+  )
+}
