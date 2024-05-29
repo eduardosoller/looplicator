@@ -19,14 +19,16 @@ export default function Card({
             </div>
           )}
           <div className={`${styles.image} card-image-top`}>
-            <Image
-              src={cover_url}
-              style={{ width: "100%", height: "auto" }}
-              alt="cover"
-              width={235}
-              height={235}
-              priority
-            />
+            {cover_url && (
+              <Image
+                src={cover_url}
+                style={{ width: "100%", height: "auto" }}
+                alt="cover"
+                width={235}
+                height={235}
+                priority
+              />
+            )}
           </div>
           <div className={styles.body}>
             <h4 className={styles.title}>{title}</h4>

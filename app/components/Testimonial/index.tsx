@@ -13,13 +13,15 @@ export default async function Testimonial() {
             <div className={`${styles["col-center"]}`}>
               <div className={`${styles.title}`}>{testimonial}</div>
               <div className={styles.footer}>
-                <Image
-                  src={avatar}
-                  width="60"
-                  height="60"
-                  alt="testimonial avatar"
-                  className={styles.image}
-                />
+                {avatar && (
+                  <Image
+                    src={avatar}
+                    width="60"
+                    height="60"
+                    alt="testimonial avatar"
+                    className={styles.image}
+                  />
+                )}
                 {name}
               </div>
             </div>

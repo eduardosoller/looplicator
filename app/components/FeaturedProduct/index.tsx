@@ -3,9 +3,11 @@ import { secondary } from "../Fonts";
 import styles from "./styles.module.css";
 import LinkButton from "../LinkButton";
 import FireSvg from "../Svg/Fire";
-import { getDetails, getFeaturedPack } from "@/services/product";
+import { getFeaturedPack } from "@/services/product";
+import { getPastMonthWithYear } from "@/utils/helpers";
 export default async function FeaturedProduct() {
   const { thumbs, title, tracks, price, release_id } = await getFeaturedPack();
+  const { past_month, year } = getPastMonthWithYear();
   const type = price === 0 ? "Free" : "Premium";
   return (
     <div className={`col-xl-6 col-lg-12 col-md-12 col-xm-12 ${styles.text}`}>
@@ -13,19 +15,22 @@ export default async function FeaturedProduct() {
         <div className={`${styles.card}`}>
           <div className="row">
             <div className={`${styles["image-wrapper"]}`}>
-              <Image
-                src={thumbs[400]}
-                width="300"
-                height="300"
-                alt="home-banner"
-                className={styles.image}
-                priority
-              />
+              {thumbs && (
+                <Image
+                  src={thumbs[400]}
+                  width="300"
+                  height="300"
+                  alt="home-banner"
+                  className={styles.image}
+                  priority
+                />
+              )}
             </div>
             <div className={`${styles["col-center"]}`}>
               <h3 className={styles.title}>{title}</h3>
               <div className={`${secondary.className} ${styles.text}`}>
-                The most commented and liked pack by YouTube fans in April 2024.
+                The most commented and liked pack by YouTube fans in{" "}
+                {`${past_month} ${year}`}.
                 <div className={styles.info}>
                   {tracks.length} loops | {type} Pack
                 </div>

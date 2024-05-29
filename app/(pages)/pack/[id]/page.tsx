@@ -8,7 +8,12 @@ import styles from "./styles.module.css";
 import { getDetails } from "@/services/product";
 import { Metadata } from "next";
 import { formatCurrency } from "utils/helpers";
-import { ShareButtons } from "@/components/ShareButton";
+//import { ShareButtons } from "@/components/ShareButton";
+import dynamic from "next/dynamic";
+
+const ShareButtons = dynamic(() => import("../../../components/ShareButtons"), {
+  ssr: false,
+});
 
 type Props = {
   params: { id: string };
@@ -16,32 +21,33 @@ type Props = {
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const { params } = props;
-  const data = await getDetails(params.id);
-  const type = data.price === 0 ? "FREE" : "PREMIUM";
+  const { price, title } = await getDetails(params.id);
+  const type = price === 0 ? "FREE" : "PREMIUM";
   return {
-    title: `Loop pack | ${data.title} | ${type} Loops | Looplicator`,
+    title: `Loop pack | ${title} | ${type} Loops | Looplicator`,
   };
 };
 
 export default async function Details({ params }: { params: { id: string } }) {
-  const data = await getDetails(params.id);
-  const buttonLink = data?.download_url ? data.download_url : data?.payment_url;
-  const buttonLabel = data?.download_url
+  const { download_url, title, tracks, payment_url, price, thumbs } =
+    await getDetails(params.id);
+  const buttonLink = download_url ? download_url : payment_url;
+  const buttonLabel = download_url
     ? "DOWNLOAD"
-    : "PAY " + formatCurrency(data?.price);
-  const buttonIcon = data?.download_url ? "download" : "pay";
+    : "PAY " + formatCurrency(price);
+  const buttonIcon = download_url ? "download" : "pay";
 
   return (
     <>
       <section className={styles.details}>
         <div className="container">
-          {data ? (
+          {thumbs ? (
             <div className="row">
               <div className="col-12 col-lg-6">
                 <div className={styles["column-left"]}>
                   <div className={styles.cover}>
                     <Image
-                      src={data.thumbs[650]}
+                      src={thumbs[650]}
                       alt={"cover"}
                       width={400}
                       height={400}
@@ -53,10 +59,10 @@ export default async function Details({ params }: { params: { id: string } }) {
               </div>
               <div className="col-12 col-lg-6">
                 <div className={styles["column-right"]}>
-                  <h3 className={styles.title}>{data.title}</h3>
+                  <h3 className={styles.title}>{title}</h3>
                   <div className={`${secondary.className} ${styles.subtitle}`}>
-                    {`${data.tracks.length} loops | ${
-                      data.price === 0 ? "FREE PACK" : "PREMIUM PACK"
+                    {`${tracks.length} loops | ${
+                      price === 0 ? "FREE PACK" : "PREMIUM PACK"
                     }`}
                   </div>
                   {buttonLink && (
@@ -69,7 +75,7 @@ export default async function Details({ params }: { params: { id: string } }) {
 
                   <ShareButtons />
 
-                  <AudioPlayer playlist={data.tracks} />
+                  <AudioPlayer playlist={tracks} />
                 </div>
               </div>
             </div>

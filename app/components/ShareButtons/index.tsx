@@ -5,13 +5,12 @@ import FacebookSvg from "../Svg/Facebook";
 import TwitterSvg from "../Svg/Twitter";
 import styles from "./styles.module.css";
 import { ReactNode } from "react";
-export function ShareButtons({
+export default function ShareButtons({
   text = "Hey, listen those dope loops by Looplicator: ",
 }: {
   text?: string;
 }) {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
-
   const social: { type: string; url: string; icon: ReactNode }[] = [
     {
       type: "whatsapp",
