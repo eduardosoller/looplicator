@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Looplicator",
   description: "Get original loops for your project.",
   keywords: [
+    "loops",
     "loop packs",
     "drum loops",
     "industrial loops",
