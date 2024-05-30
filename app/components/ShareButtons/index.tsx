@@ -6,7 +6,7 @@ import TwitterSvg from "../Svg/Twitter";
 import styles from "./styles.module.css";
 import { ReactNode } from "react";
 export default function ShareButtons({
-  text = "Hey, listen those dope loops by Looplicator: ",
+  text = "Hey, listen to these dope loops from Looplicator",
 }: {
   text?: string;
 }) {
