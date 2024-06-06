@@ -18,7 +18,7 @@ declare global {
   };
   type Testimonial = {
     name: string;
-    testimonial: string;
+    comment: string;
     avatar_url: string;
     date: string
   }
