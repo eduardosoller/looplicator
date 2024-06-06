@@ -18,7 +18,7 @@ export default function Home() {
         <Testimonial />
       </Section>
       <ProductList limit={4} title="LATEST RELEASES" order="desc" />
-      {/* <Stats /> */}
+      <Stats />
     </>
   );
 }

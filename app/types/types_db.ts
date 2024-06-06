@@ -45,27 +45,54 @@ export type Database = {
         }
         Relationships: []
       }
+      stats: {
+        Row: {
+          created_at: string
+          gigabytes: number | null
+          id: number
+          loops: number | null
+          packs: number | null
+          seconds: number | null
+        }
+        Insert: {
+          created_at?: string
+          gigabytes?: number | null
+          id?: number
+          loops?: number | null
+          packs?: number | null
+          seconds?: number | null
+        }
+        Update: {
+          created_at?: string
+          gigabytes?: number | null
+          id?: number
+          loops?: number | null
+          packs?: number | null
+          seconds?: number | null
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           avatar_url: string | null
+          comment: string
           created_at: string
           id: number
           name: string
-          comment: string
         }
         Insert: {
           avatar_url?: string | null
+          comment: string
           created_at?: string
           id?: number
           name: string
-          comment: string
         }
         Update: {
           avatar_url?: string | null
+          comment?: string
           created_at?: string
           id?: number
           name?: string
-          comment?: string
         }
         Relationships: []
       }
@@ -106,24 +133,24 @@ export type Database = {
       random_testimonial: {
         Row: {
           avatar_url: string | null
+          comment: string | null
           created_at: string | null
           id: number | null
           name: string | null
-          comment: string | null
         }
         Insert: {
           avatar_url?: string | null
+          comment?: string | null
           created_at?: string | null
           id?: number | null
           name?: string | null
-          comment?: string | null
         }
         Update: {
           avatar_url?: string | null
+          comment?: string | null
           created_at?: string | null
           id?: number | null
           name?: string | null
-          comment?: string | null
         }
         Relationships: []
       }

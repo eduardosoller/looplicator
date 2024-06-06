@@ -1,25 +1,35 @@
+import { getStats } from "@/services/stats";
 import { secondary } from "../Fonts";
 import Section from "../Section";
 import style from "./styles.module.css";
-export default function Stats() {
-  const data = [
-    { label: "packs", value: 456 },
-    { label: "loops", value: 23456 },
-    { label: "gigabytes", value: 5.6 },
-    { label: "minutes", value: 456 },
-  ];
+export default async function Stats() {
+  const { loops, seconds, gigabytes, packs } = await getStats();
+
   return (
     <Section cssClass={style.section}>
-      {data.map((item) => {
-        return (
-          <div className="col-3 text-center" key={item.label}>
-            <div className={`${secondary.className} ${style.number}`}>
-              {item.value}
-            </div>
-            <div className={style.label}>{item.label}</div>
-          </div>
-        );
-      })}
+      <div className="col-3 text-center">
+        <div className={`${secondary.className} ${style.number}`}>{packs}</div>
+        <div className={style.label}>packs</div>
+      </div>
+
+      <div className="col-3 text-center">
+        <div className={`${secondary.className} ${style.number}`}>{loops}</div>
+        <div className={style.label}>loops</div>
+      </div>
+
+      <div className="col-3 text-center">
+        <div className={`${secondary.className} ${style.number}`}>
+          {Math.floor(seconds / 60)}
+        </div>
+        <div className={style.label}>minutes</div>
+      </div>
+
+      <div className="col-3 text-center">
+        <div className={`${secondary.className} ${style.number}`}>
+          {Math.floor(gigabytes)}
+        </div>
+        <div className={style.label}>gigabytes</div>
+      </div>
     </Section>
   );
 }

@@ -7,9 +7,9 @@ interface BestPack {
 
 interface Testimonial {
   name: string;
-  date: string;
   comment: string;
   avatar_url: string;
+  date?: string
 }
 
 interface Stats {
@@ -71,10 +71,15 @@ export async function GET(): Promise<Response> {
   //   return NextResponse.json({ error: bestPacksUpdate.error.message }, { status: 500 });
   // }
 
+  //não vamos usar date no banco de dados
+  metaData.testimonials.forEach(comment => {
+    delete comment.date;
+  });
   // Inserir ou atualizar testimonials
+  // Campo "name" é UNIQUE
   const testimonialsUpdate = await supabase
     .from('testimonials')
-    .upsert(metaData.testimonials);
+    .upsert(metaData.testimonials, { onConflict: "name" });
 
   if (testimonialsUpdate.error) {
     console.error('Error updating testimonials:', testimonialsUpdate.error.message);
@@ -84,7 +89,8 @@ export async function GET(): Promise<Response> {
   // Inserir ou atualizar stats
   const statsUpdate = await supabase
     .from('stats')
-    .update([metaData.stats]);
+    .update([metaData.stats])
+    .eq("id", 1)
 
   if (statsUpdate.error) {
     console.error('Error updating stats:', statsUpdate.error.message);

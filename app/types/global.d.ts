@@ -22,6 +22,13 @@ declare global {
     avatar_url: string;
     date: string
   }
+  type PageStats = {
+    id: number
+    loops: number,
+    seconds: number,
+    packs: number,
+    gigabytes: number
+  }
   type ProductsResponse = {
     items: Product[];
     page: number;
