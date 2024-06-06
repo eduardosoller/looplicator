@@ -47,25 +47,25 @@ export type Database = {
       }
       testimonials: {
         Row: {
-          avatar: string | null
+          avatar_url: string | null
           created_at: string
           id: number
           name: string
-          testimonial: string
+          comment: string
         }
         Insert: {
-          avatar?: string | null
+          avatar_url?: string | null
           created_at?: string
           id?: number
           name: string
-          testimonial: string
+          comment: string
         }
         Update: {
-          avatar?: string | null
+          avatar_url?: string | null
           created_at?: string
           id?: number
           name?: string
-          testimonial?: string
+          comment?: string
         }
         Relationships: []
       }
@@ -105,25 +105,25 @@ export type Database = {
     Views: {
       random_testimonial: {
         Row: {
-          avatar: string | null
+          avatar_url: string | null
           created_at: string | null
           id: number | null
           name: string | null
-          testimonial: string | null
+          comment: string | null
         }
         Insert: {
-          avatar?: string | null
+          avatar_url?: string | null
           created_at?: string | null
           id?: number | null
           name?: string | null
-          testimonial?: string | null
+          comment?: string | null
         }
         Update: {
-          avatar?: string | null
+          avatar_url?: string | null
           created_at?: string | null
           id?: number | null
           name?: string | null
-          testimonial?: string | null
+          comment?: string | null
         }
         Relationships: []
       }
