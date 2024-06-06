@@ -2,16 +2,17 @@ import { NextResponse } from "next/server"
 import { createClient } from 'utils/supabase/server'
 
 export async function GET(): Promise<Response> {
+  const supabase = createClient()
 
   const file = await fetch('https://looplipacker.s3.amazonaws.com/looplishop.json', { cache: 'no-cache' })
   if (!file.ok) {
     return NextResponse.json({ error: "Can't read json file" }, { status: 500 })
   }
+
   const json: { [index: string]: any } = await file.json()
   const packs: any = []
   const tracks: any = []
 
-  const supabase = createClient()
   async function getLastPack() {
     const { data, error } = await supabase
       .from('packs')
@@ -25,10 +26,13 @@ export async function GET(): Promise<Response> {
     console.log(data[0]?.release_id)
     return data[0]?.release_id
   }
+
   const release_id = await getLastPack()
+
   function isNewer(current: string, recent?: any) {
     return recent ? new Date(current) > new Date(recent) : true
   }
+
   Object.entries(json).forEach(([key, value]) => {
     if (isNewer(key, release_id)) {
       packs.push({
@@ -41,6 +45,7 @@ export async function GET(): Promise<Response> {
       })
     }
   })
+
   async function insertPacks(array: []) {
     const { data, error } = await supabase.from('packs')
       .insert(array)
@@ -65,11 +70,11 @@ export async function GET(): Promise<Response> {
   }
 
   const { error, data } = await supabase.from('tracks')
-    .insert(tracks)
+    .upsert(tracks)
     .select()
   if (error) {
     //TODO: se der erro aqui, deletar pack
     return NextResponse.json(error.message + ' - ' + error.details)
   }
-  return NextResponse.json(`Foram inseridos ${response.length} pack(s) e ${data.length} tracks.`)
+  return NextResponse.json({ message: `${response.length} inserted pack(s) and ${data.length} tracks.` })
 }

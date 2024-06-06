@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import QuotesSvg from "../Svg/Quotes";
 import { getRandomTestimonial } from "@/services/testimonial";
 export default async function Testimonial() {
-  const { avatar, name, testimonial } = await getRandomTestimonial();
+  const { avatar_url, name, testimonial } = await getRandomTestimonial();
   return (
     <div className={`col-xl-6 col-lg-12 col-md-12 col-xm-12 ${styles.text}`}>
       <div className={`${styles.card__wrapper}`}>
@@ -13,9 +13,9 @@ export default async function Testimonial() {
             <div className={`${styles["col-center"]}`}>
               <div className={`${styles.title}`}>{testimonial}</div>
               <div className={styles.footer}>
-                {avatar && (
+                {avatar_url && (
                   <Image
-                    src={avatar}
+                    src={avatar_url}
                     width="60"
                     height="60"
                     alt="testimonial avatar"

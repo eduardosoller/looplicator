@@ -14,6 +14,5 @@ export async function GET(request: Request): Promise<Response> {
     console.log('error', error)
     throw new Error(error.message)
   }
-  console.log(data)
   return NextResponse.json(data)
 }
