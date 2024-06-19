@@ -1,10 +1,11 @@
 .header {
   border-bottom: 1px solid var(--soller400);
+  padding: 0.5em 0;
 }
 .logo {
   display: flex;
   justify-content: center;
-  padding: 1em 0 0.5em 0;
+  padding: 0.5em 0;
 }
 .social {
   display: flex;
@@ -12,12 +13,7 @@
   justify-content: center;
   height: 100%;
 }
-.social a {
-  margin: 0 1em 0 1em;
-}
-.social a:last-child {
-  margin: 0 0 0 1em;
-}
+
 @media (min-width: 768px) {
   .logo {
     padding: 2em 0;
